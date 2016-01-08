@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html>
+<head>
+	<meta charset="utf-8" />
+	<title>GoBlog后台管理 v{{.version}}</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="lsj86@qq.com" name="author" />
+	<link href="../../static/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="../../static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+	<link href="../../static/themes/admin/css/style.css" rel="stylesheet" type="text/css"/>
+	<script src="../../static/js/jquery.min.js" type="text/javascript"></script>
+	<script src="../../static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../../static/datepicker/WdatePicker.js" type="text/javascript"></script>
+	<script src="../../static/themes/admin/js/admin.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+
+
+
+
+<fieldset>
+	<legend>文章列表</legend>
+
+	<div class="toolbar">
+	
+		<a href="/admin/articlelist?status=0" {{if .yifabu}}class="active"{{end}}>已发布({{.articlesum1}})</a>
+		<span class="divider">|</span>
+	
+		<a href="/admin/articlelist?status=1"{{if .caogaoxiang}}class="active"{{end}}>草稿箱({{.articlesum2}})</a>
+		<span class="divider">|</span>
+	
+	    
+		<a href="/admin/articlelist?status=2"{{if .huishouzhan}}class="active"{{end}}>回收站({{.articlesum3}})</a>
+	
+	</div>
+
+	<div class="search-form">
+	<form {{if .yifabu}}action="/admin/articlelist?status=0"{{end}} {{if .caogaoxiang}}action="/admin/articlelist?status=1"{{end}}{{if .huishouzhan}}action="/admin/articlelist?status=2"{{end}}
+	method="post" class="form-inline">
+		<select name="searchtype" class="span2" >
+		<option value="title" >标题</option>
+		<option value="author" {{if eq .searchtype "author"}}selected="selected"{{end}}>作者</option>
+		<option value="tag" {{if eq .searchtype "tag"}}selected="selected"{{end}}>标签</option>
+		</select>
+		<input name="keyword" id="keyword" {{if .guanjianzi}}value="{{.guanjianzivalue}}"{{end}}class="input" placeholder="关键字" type="text" />
+		<button type="submit" class="btn">搜索</button>
+	</form>
+	</div>
+
+	<form method="post" name="p" action="/article/batch">
+	<table class="table table-list">
+		<thead>
+			<tr>
+				<th width="30"><input type="checkbox" name="all" value="0" onclick="checkall('ids[]', this)" /></th>
+				<th width="50">ID</th>
+				<th>标题</th>
+				<th width="150">类别</th>
+				<th width="60">点击量</th>
+				<th width="60">发布人</th>
+				<th width="120">发布时间</th>
+				<th width="80">操作</th>
+			</tr>
+		</thead>
+		<tbody>
+		{{range $k,$v:=.article}}
+		<tr>
+			<td><input type="checkbox" name="ids[]" value="{{$v.Id}}" /></td>
+			<td>{{$v.Id}}</td>
+			<td class="hl_title">
+				{{if eq $v.IsTop 1}}
+				<i class="icon-arrow-up" title="置顶"> </i>
+				{{end}}
+				<a href="/admin/editarticle?aid={{$v.Id}}" target="_blank">{{str2html $v.Title}}</a>
+				
+				<!-- <span class="label label-important">页面</span> -->
+			
+			</td>
+			<td class="hl_tag">{{$v.Tags}}</td>
+			<td>{{$v.Views}}</td>
+			<td class="hl_author">{{$v.Author}}</td>
+			<td>{{$v.PostTime |time}}</td>
+			<td><a href="/admin/editarticle?aid={{$v.Id}}">编辑</a> | <a href="/article/delete?articleid={{$v.Id}}&status={{$v.Status}}" onclick="return del_confirm()">删除</a></td>
+		</tr>
+
+		{{end}}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="20"></td>
+			</tr>
+			<tr>
+				<td width="30"><input type="checkbox" name="all" value="0" onclick="checkall('ids[]', this)" /></td>
+				<td colspan="20">
+					<select name="op" id="op">
+					<option value="">批量操作</option>
+					<option value="topub" >移至已发布</option>
+					<option value="todrafts" >移至草稿箱</option>
+					<option value="totrash" >移至回收站</option>
+					<option value="delete" >删除</option>
+					</select>
+					<button type="submit" class="btn btn-small">应用</button>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	</form>
+
+</fieldset>
+
+<script type="text/javascript">
+$(function() {
+	searchtype = $(":input[name='searchtype']").children("option:selected").val();
+	keyword = $(":input[name='keyword']").val();
+	if (keyword != "") {
+		re = new RegExp(keyword, "g");
+		switch (searchtype) {
+			case "title":
+				$(".hl_title").each(function(){
+					$(this).children("a").html($(this).children("a").html().replace(re, "<span style='color:red'>"+keyword+"</span>"));
+				});
+				break;
+			case "author":
+				$(".hl_author").each(function(){
+					$(this).html($(this).html().replace(re, "<span style='color:red'>"+keyword+"</span>"));
+				});
+				break;
+			case "tag":
+				$(".hl_tag").each(function(){
+					$(this).children("a").html($(this).children("a").html().replace(re, "<span style='color:red'>"+keyword+"</span>"));
+				});
+				break;
+		}
+		
+	}
+})
+</script>
+
+
+
+		</div>
+	</div>
+</div>
+</body>
+</html>

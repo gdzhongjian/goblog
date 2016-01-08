@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<head>
+	<meta charset="utf-8" />
+	<title>GoBlog后台管理 v{{.version}}</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="lsj86@qq.com" name="author" />
+	<link href="../../static/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="../../static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+	<link href="../../static/themes/admin/css/style.css" rel="stylesheet" type="text/css"/>
+	<script src="../../static/js/jquery.min.js" type="text/javascript"></script>
+	<script src="../../static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../../static/datepicker/WdatePicker.js" type="text/javascript"></script>
+	<script src="../../static/themes/admin/js/admin.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+
+
+
+
+
+<fieldset>
+	<legend>添加用户</legend>
+
+	<form class="form-horizontal" method="post">
+		<input type="hidden" name="dosubmit" value="yes" />
+
+	<table class="table table-form">
+		<tbody>
+		<tr>
+			<th class="span2">账号：</th>
+			<td><input name="account" value="" class="input" type="text" /> <span class="text-error"></span></td>
+		</tr>
+		<tr>
+			<th>密码：</th>
+			<td><input name="password" value="" class="input" type="password" /> <span class="text-error"></span></td>
+		</tr>
+		<tr>
+			<th>确认密码：</th>
+			<td><input name="password1" value="" class="input" type="password" /> <span class="text-error"></span></td>
+		</tr>
+		<tr>
+			<th>博客名称：</th>
+			<td><input name="username" value="" class="input" type="text" /> <span class="text-error"></span></td>
+		</tr>
+		</tr>
+		<tr>
+			<th>激活状态：</th>
+			<td>
+			<input type="radio" name="active" value="0" id="data_active_0" checked />
+			<label for="data_active_0" class="help-inline">未激活</label>&nbsp;&nbsp;
+			<input type="radio" name="active" value="1" id="data_active_1" />
+			<label for="data_active_1" class="help-inline">已激活</label>&nbsp;&nbsp;</td>
+		</tr>
+		{{if .errmsg}}
+		<div class="alert alert-error">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		{{.errmsg}}
+		</div>
+		{{end}}
+		{{if .zhuce}}
+		<div class="alert alert-success">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		注册成功！
+		</div>
+		{{end}}
+		</tbody>
+		<tfoot>
+			<tr>
+				<th></th>
+				<td>
+				<button type="submit" class="btn"><i class="icon-ok"></i> 保存</button>
+				<button type="button" class="btn" onclick="javascript:history.back();">取消</button>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	</form>
+
+</fieldset>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+</body>
+</html>

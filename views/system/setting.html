@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8" />
+	<title>GoBlog后台管理 v{{.version}}</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+	<meta content="lsj86@qq.com" name="author" />
+	<link href="../../static/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="../../static/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+	<link href="../../static/themes/admin/css/style.css" rel="stylesheet" type="text/css"/>
+	<script src="../../static/js/jquery.min.js" type="text/javascript"></script>
+	<script src="../../static/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="../../static/datepicker/WdatePicker.js" type="text/javascript"></script>
+	<script src="../../static/themes/admin/js/admin.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+
+
+<fieldset>
+	<legend>系统设置</legend>
+	<form class="form-horizontal" method="post">
+	<table class="table table-form">
+		<tbody>
+			<tr>
+				<th class="span2">网站名称</th>
+				<td>
+					<input name="sitename" value="" class="input-xlarge" title="网站名称" type="text" />
+				</td>
+			</tr>
+			<tr>
+				<th>副标题</th>
+				<td>
+					<input name="subtitle" value="" class="input-xlarge" title="副标题" type="text" />
+				</td>
+			</tr>
+			<tr>
+				<th>列表每页数量</th>
+				<td>
+					<input name="pagesize" value="" class="input" title="内容列表每页数量" type="text" />
+				</td>
+			</tr>
+			<tr>
+				<th>网站关键字</th>
+				<td>
+					<input name="keywords" value="" class="span5" title="网站关键字" type="text" />
+				</td>
+			</tr>
+				<tr>
+				<th>网站描述</th>
+				<td>
+					<textarea name="description" rows="4" class="span5" title="网站描述" ></textarea>
+				</td>
+			</tr>
+			<tr>
+				<th>统计代码</th>
+				<td>
+					<textarea name="stat" rows="2" class="span5" title="统计代码" ></textarea>
+				</td>
+			</tr>
+			<tr>
+				<th>主题模板</th>
+				<td>
+					<input name="theme" value="" class="input" title="主题模板" type="text" />
+				</td>
+			</tr>
+			<tr>
+				<th>时区设置</th>
+				<td>
+					<select name="timezone">
+					<option value="-12" >(标准时-12:00) 日界线西</option>
+					<option value="-11" >(标准时-11:00) 中途岛、萨摩亚群岛</option>
+					<option value="-10" >(标准时-10:00) 夏威夷</option>
+					<option value="-9" >(标准时-9:00) 阿拉斯加</option>
+					<option value="-8" >(标准时-8:00) 太平洋时间(美国和加拿大)</option>
+					<option value="-7" >(标准时-7:00) 山地时间(美国和加拿大)</option>
+					<option value="-6" >(标准时-6:00) 中部时间(美国和加拿大)、墨西哥城</option>
+					<option value="-5" >(标准时-5:00) 东部时间(美国和加拿大)、波哥大</option>
+					<option value="-4" >(标准时-4:00) 大西洋时间(加拿大)、加拉加斯</option>
+					<option value="-3.5">(标准时-3:30) 纽芬兰</option>
+					<option value="-3" >(标准时-3:00) 巴西、布宜诺斯艾利斯、乔治敦</option>
+					<option value="-2" >(标准时-2:00) 中大西洋</option>
+					<option value="-1" >(标准时-1:00) 亚速尔群岛、佛得角群岛</option>
+					<option value="0" >(格林尼治标准时) 西欧时间、伦敦、卡萨布兰卡</option>
+					<option value="1">(标准时+1:00) 中欧时间、安哥拉、利比亚</option>
+					<option value="2" >(标准时+2:00) 东欧时间、开罗，雅典</option>
+					<option value="3" >(标准时+3:00) 巴格达、科威特、莫斯科</option>
+					<option value="3.5" >(标准时+3:30) 德黑兰</option>
+					<option value="4" >(标准时+4:00) 阿布扎比、马斯喀特、巴库</option>
+					<option value="4.5">(标准时+4:30) 喀布尔</option>
+					<option value="5" >(标准时+5:00) 叶卡捷琳堡、伊斯兰堡、卡拉奇</option>
+					<option value="5.5" >(标准时+5:30) 孟买、加尔各答、新德里</option>
+					<option value="6" >(标准时+6:00) 阿拉木图、 达卡、新亚伯利亚</option>
+					<option value="7" >(标准时+7:00) 曼谷、河内、雅加达</option>
+					<option value="8" selected>(北京时间) 北京、重庆、香港、新加坡</option>
+					<option value="9" >(标准时+9:00) 东京、汉城、大阪、雅库茨克</option>
+					<option value="9.5" >(标准时+9:30) 阿德莱德、达尔文</option>
+					<option value="10" >(标准时+10:00) 悉尼、关岛</option>
+					<option value="11" >(标准时+11:00) 马加丹、索罗门群岛</option>
+					<option value="12">(标准时+12:00) 奥克兰、惠灵顿、堪察加半岛</option>
+					</select>
+					<span>当前UTC时间：</span>
+				</td>
+			</tr>
+			
+		</tbody>
+		<tfoot>
+			<tr>
+				<td></td>
+				<td>
+				<button type="submit" class="btn"><i class="icon-ok"></i> 保存</button>
+				<button type="button" class="btn" onclick="javascript:history.back();">取消</button>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	</form>
+</fieldset>
+
+
+
+
+
+
+		</div>
+	</div>
+</div>
+</body>
+</html>
